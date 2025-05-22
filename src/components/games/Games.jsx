@@ -1,18 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 
 export default function Games() {
   const [games, setGames] = useState([]);
-  const fetchGames = async () => {
-    const response = await fetch("http://localhost:8080/api/games");
-    const data = await response.json();
-    console.log(data);
-    setGames(data.data.games);
-  };
+  const location = useLocation(); // Access the location object
+  const token = location.state?.token;
 
+  
   useEffect(() => {
+    const fetchGames = async () => {
+      const response = await fetch("http://localhost:8080/api/games", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      const data = await response.json();
+      console.log(data);
+      setGames(data.data.games);
+    };
     fetchGames();
-  }, []);
+  }, [token]);
+  
   return (
     <div>
       <h1>Games</h1>
@@ -22,7 +32,7 @@ export default function Games() {
       <div>
         {games &&
           games.map((game) => (
-            <Link to={`/create-game`} key={game._id}>
+            <Link to={`/games/${game._id}`} key={game._id}>
               <div>
                 <h2>{game.name}</h2>
                 <p>{game.email}</p>
