@@ -1,11 +1,9 @@
 import React from "react";
 import reactLogo from '../assets/react.svg'
 import viteLogo from '/vite.svg'
-import { useState } from 'react'
 import { Link } from "react-router";
 
 export default function Home() {
-  const [count, setCount] = useState(0)
 
   return (
     <div>
@@ -19,22 +17,13 @@ export default function Home() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <Link to="/users">
-          <button>Users</button>
+        <Link to="/login">
+          <button>Login</button>
         </Link>
-        <Link to="/games">
-          <button>Games</button>
+        <Link to="/register">
+          <button>Register</button>
         </Link>
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
   );
 }

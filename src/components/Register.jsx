@@ -1,10 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router";
 
-export default function Login() {
+export default function Register() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const navigate = useNavigate(); // Initialize the useNavigate hook
+  const [name, setName] = React.useState("");
+  const [image, setImage] = React.useState("");
+
+  const navigate = useNavigate();
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -16,12 +19,14 @@ export default function Login() {
     event.preventDefault();
 
     const data = {
+      name,
+      image,
       email,
       password,
     };
     console.log(data);
 
-    const response = await fetch("http://localhost:8080/api/login", {
+    const response = await fetch("http://localhost:8080/api/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -32,21 +37,37 @@ export default function Login() {
     const result = await response.json();
     console.log(result);
 
-    if (result.token && result.userId) {
+    if (result.userId) {
       localStorage.setItem("token", result.token);
       navigate(`/users/${result.userId}`, {
         state: { token: result.token },
       });
-    } else {
-      localStorage.setItem("token", result.token);
-      navigate("/games", { state: { token: result.token } });
-
     }
   };
   return (
     <div>
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="name">Name</label>
+          <input
+            onChange={(e) => setName(e.target.value)}
+            type="text"
+            id="name"
+            name="name"
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="image">Image URL</label>
+          <input
+            onChange={(e) => setImage(e.target.value)}
+            type="text"
+            id="image"
+            name="image"
+            required
+          />
+        </div>
         <div>
           <label htmlFor="email">Email</label>
           <input
@@ -67,9 +88,7 @@ export default function Login() {
             required
           />
         </div>
-        <button type="submit">
-          Login
-        </button>
+        <button type="submit">Login</button>
       </form>
     </div>
   );

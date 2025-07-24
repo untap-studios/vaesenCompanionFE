@@ -7,6 +7,7 @@ import CreatePlayerCharacter from "./components/PlayerCharacter/CreatePlayerChar
 import Games from "./components/games/Games";
 import CreateGame from "./components/games/CreateGame";
 import Login from "./components/Login";
+import Register from "./components/Register";
 import Game from "./components/games/Game";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/games" element={<Games />} />
         <Route path="/games/:gameId" element={<Game />} />
         <Route path="/create-game" element={<CreateGame />} />
