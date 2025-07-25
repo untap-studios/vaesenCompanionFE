@@ -1,5 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router";
+import { Box, TextField } from "@mui/material";
+import InputGenric from "./formComponents/InputText";
+import FormButton from "./formComponents/FormButton";
 
 export default function Login() {
   const [email, setEmail] = React.useState("");
@@ -40,37 +43,29 @@ export default function Login() {
     } else {
       localStorage.setItem("token", result.token);
       navigate("/games", { state: { token: result.token } });
-
     }
   };
   return (
-    <div>
+    <Box>
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            onChange={handleEmailChange}
-            type="email"
-            id="email"
-            name="email"
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            onChange={handlePasswordChange}
-            type="password"
-            id="password"
-            name="password"
-            required
-          />
-        </div>
-        <button type="submit">
-          Login
-        </button>
+        <InputGenric
+          kind={"email"}
+          labelText={"Email"}
+          onChange={handleEmailChange}
+          required
+        />
+
+        <InputGenric
+          kind={"password"}
+          labelText={"Password"}
+          onChange={"handlePasswordChange"}
+          required
+        />
+
+        <FormButton text={'Login'}/>
+
       </form>
-    </div>
+    </Box>
   );
 }
