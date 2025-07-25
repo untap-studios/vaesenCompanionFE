@@ -3,12 +3,12 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Users from "./components/Users";
 import Home from "./components/Home";
 import User from "./components/User";
-import CreatePlayerCharacter from "./components/PlayerCharacter/CreatePlayerCharacter";
 import Games from "./components/games/Games";
 import CreateGame from "./components/games/CreateGame";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Game from "./components/games/Game";
+import CreateCharacter from "./components/PlayerCharacter/CharacterCreation/CreateCharacter";
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
         <Route path="/create-game" element={<CreateGame />} />
         <Route path="/users" element={<Users />} />
         <Route path="/users/:userId" element={<User />} />
-        <Route path="/create-player" element={<CreatePlayerCharacter />} />
+        <Route path="/create-player" element={<CreateCharacter />} />
         <Route path="/" element={<Home />} />
         <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>
