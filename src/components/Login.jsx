@@ -46,7 +46,10 @@ export default function Login() {
     }
   };
   return (
-    <Box>
+    <Box sx={{
+      backgroundColor:'#333',
+      padding:3
+    }}>
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
         <InputGenric

@@ -14,6 +14,7 @@ const InputText = (props) => {
     >
       <Typography>{labelText}</Typography>
       <TextField
+        sx={{ input:{color:'#fff'}}}
         onChange={onChange}
         type={kind}
         id={`input-text-${kind}`}
