@@ -10,12 +10,12 @@ import CharacterRelationships from "./CharacterRelationships";
 import CharacterMementos from "./CharacterMementos";
 import CharacterEquipment from "./CharacterEquipment";
 import CharacterWeapons from "./CharacterWeapons";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 export default function CreateCharacter() {
   const location = useLocation();
+  const navigate = useNavigate();
   const userId = location.state?.userId || "";
-  console.log("User ID:", userId);
   const [formData, setFormData] = useState({
     name: "",
     image: "",
@@ -51,7 +51,6 @@ export default function CreateCharacter() {
     const { name, value } = e.target;
     const checkIfNum = isNaN(parseInt(value, 10)) ? value : parseInt(value, 10);
 
-    console.log(e);
     setFormData({
       ...formData,
       [name]: checkIfNum,
@@ -59,7 +58,6 @@ export default function CreateCharacter() {
   };
 
   const handleSubmit = async () => {
-    console.log("Form Data:", formData);
     const response = await fetch(
       "http://localhost:8080/api/player-characters",
       {
@@ -71,7 +69,11 @@ export default function CreateCharacter() {
       }
     );
 
-    console.log("Response:", response);
+    if (response.ok) {
+      navigate(`/users/${userId}`);
+    } else {
+      console.error("Error submitting form");
+    }
   };
 
   const handleChangeScreen = (forward) => {

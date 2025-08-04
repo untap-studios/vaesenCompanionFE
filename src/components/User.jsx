@@ -9,7 +9,7 @@ export default function User() {
     const fetchUser = async () => {
       const response = await fetch(`http://localhost:8080/api/users/${userId}`);
       const data = await response.json();
-      console.log(data);
+
       setUserData(data.data.user);
     };
     fetchUser();

@@ -15,7 +15,7 @@ export default function Users() {
       },
     });
     const data = await response.json();
-    console.log(data);
+
     setUsers(data.data.users);
   };
 

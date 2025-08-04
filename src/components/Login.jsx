@@ -19,7 +19,6 @@ export default function Login() {
       email,
       password,
     };
-    console.log(data);
 
     const response = await fetch("http://localhost:8080/api/login", {
       method: "POST",
@@ -30,7 +29,6 @@ export default function Login() {
     });
 
     const result = await response.json();
-    console.log(result);
 
     if (result.token && result.userId) {
       localStorage.setItem("token", result.token);

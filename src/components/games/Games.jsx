@@ -17,7 +17,7 @@ export default function Games() {
           },
         });
       const data = await response.json();
-      console.log(data);
+
       setGames(data.data.games);
     };
     fetchGames();

@@ -24,7 +24,6 @@ export default function Register() {
       email,
       password,
     };
-    console.log(data);
 
     const response = await fetch("http://localhost:8080/api/register", {
       method: "POST",
@@ -35,7 +34,6 @@ export default function Register() {
     });
 
     const result = await response.json();
-    console.log(result);
 
     if (result.userId) {
       localStorage.setItem("token", result.token);
