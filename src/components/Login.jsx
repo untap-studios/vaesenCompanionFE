@@ -60,7 +60,7 @@ export default function Login() {
         <InputGenric
           kind={"password"}
           labelText={"Password"}
-          onChange={"handlePasswordChange"}
+          onChange={handlePasswordChange}
           required
         />
 
