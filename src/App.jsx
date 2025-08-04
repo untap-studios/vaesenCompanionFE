@@ -9,6 +9,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Game from "./components/games/Game";
 import CreateCharacter from "./components/PlayerCharacter/CharacterCreation/CreateCharacter";
+import Character from "./components/Character";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/users" element={<Users />} />
         <Route path="/users/:userId" element={<User />} />
         <Route path="/create-player" element={<CreateCharacter />} />
+        <Route path="/character/:charId" element={<Character />} />
         <Route path="/" element={<Home />} />
         <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>
