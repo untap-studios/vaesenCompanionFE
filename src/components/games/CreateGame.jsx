@@ -13,12 +13,7 @@ export default function CreateGame() {
             name,
             description,
             image
-        }
-        console.log(
-            "%csrc/components/games/CreateGame.jsx:10 gameData",
-            "color: #007acc;",
-            gameData
-        );
+        };
 
         fetch("http://localhost:8080/api/games", {
             method: "POST",
@@ -30,7 +25,6 @@ export default function CreateGame() {
         })
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
             if (data) {
                 navigate("/games", { state: { token: localStorage.getItem("token") } });
             }

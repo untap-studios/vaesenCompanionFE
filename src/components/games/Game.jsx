@@ -8,11 +8,11 @@ export default function Game() {
     const [userToAdd, setUserToAdd] = useState(null);
 
     useEffect(() => {
-        console.log('%csrc/components/games/Game.jsx:10 useParams', 'color: #007acc;', useParams);
+        
         const fetchGame = async () => {
             const response = await fetch(`http://localhost:8080/api/games/${gameId}`);
             const data = await response.json();
-            console.log(data);
+            
             setGameData(data.data.game);
         }
         fetchGame();
@@ -29,10 +29,10 @@ export default function Game() {
             },
         });
         const data = await user.json();
-        console.log(data, data.data.users, data.data.users.name === name, name);
-        console.log('look', data.data.users.find((user) => user.name === name))
+        
+        
         setUserToAdd(data.data.users.find((user) => user.name === name));
-        console.log(userToAdd);
+        
     }
 
     const addUserToGame = async (e) => {
@@ -47,6 +47,7 @@ export default function Game() {
         });
         const data = await response.json();
         console.log(data);
+        
     }
 
   return (
