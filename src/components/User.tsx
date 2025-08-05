@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 import CharacterTile from "./PlayerCharacter/CharacterTile";
+import { UserTypes } from "../types/user";
+import { callApi } from "../utils/callApi";
 
 export default function User() {
   const { userId } = useParams();
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState<UserTypes | null>(null);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      const response = await fetch(`http://localhost:8080/api/users/${userId}`);
-      const data = await response.json();
+    const getUser = async () => {
 
+      const data = await callApi(`users/${userId}`, "GET");
+      console.log(data)
       setUserData(data.data.user);
     };
-    fetchUser();
+
+    getUser();
   }, [userId]);
 
   return (
@@ -21,6 +24,9 @@ export default function User() {
       <h1>User</h1>
       <Link to="/create-player" state={{ userId }}>
         <button>Create Player</button>
+      </Link>
+      <Link to="/games">
+        <button>View Games</button>
       </Link>
       {userData && (
         <div>

@@ -1,16 +1,19 @@
 import { Button, TextField, Typography } from "@mui/material";
 import React from "react";
+import { CreateCharacterScreenComponentProps } from "../../../types/playerCharacterCreation";
+import { ChangeEvent } from "../../../types/events";
+import { Memento } from "../../../types/playerCharacter";
 
-export default function CharacterMementos({ formData, handleChange }) {
-  const [toggleForm, setToggleForm] = React.useState(false);
-  const [mementos, setMementos] = React.useState([]);
-  const [mementoName, setMementoName] = React.useState("");
-  const [mementoDescription, setMementoDescription] = React.useState("");
+export default function CharacterMementos({ formData, handleChange }: CreateCharacterScreenComponentProps) {
+  const [toggleForm, setToggleForm] = React.useState<boolean>(false);
+  const [mementos, setMementos] = React.useState<Memento[]>([]);
+  const [mementoName, setMementoName] = React.useState<string>("");
+  const [mementoDescription, setMementoDescription] = React.useState<string>("");
 
   const handleMementoChange = () => {
     const memento = {
       name: mementoName,
-      value: mementoDescription,
+      description: mementoDescription,
     };
     handleChange({
       target: {
@@ -20,11 +23,11 @@ export default function CharacterMementos({ formData, handleChange }) {
     });
   };
 
-  const handleMementoNameChange = (e) => {
+  const handleMementoNameChange = (e: ChangeEvent) => {
     setMementoName(e.target.value);
   };
 
-  const handleMementoDescriptionChange = (e) => {
+  const handleMementoDescriptionChange = (e: ChangeEvent) => {
     setMementoDescription(e.target.value);
   };
 
@@ -34,7 +37,7 @@ export default function CharacterMementos({ formData, handleChange }) {
         mementos.map((memento, index) => (
           <div key={index}>
             <Typography variant="h6">{memento.name}</Typography>
-            <Typography variant="body1">{memento.value}</Typography>
+            <Typography variant="body1">{memento.description}</Typography>
           </div>
         ))}
 
@@ -67,7 +70,7 @@ export default function CharacterMementos({ formData, handleChange }) {
                 ...mementos,
                 {
                   name: mementoName,
-                  value: mementoDescription,
+                  description: mementoDescription,
                 },
               ]);
               handleMementoChange();

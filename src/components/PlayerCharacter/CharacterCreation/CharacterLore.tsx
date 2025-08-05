@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material";
-import React from "react";
+import { CreateCharacterScreenComponentProps } from "../../../types/playerCharacterCreation";
 
-export default function CharacterLore({ formData, handleChange }) {
+export default function CharacterLore({ formData, handleChange }: CreateCharacterScreenComponentProps) {
   return (
     <>
       <TextField

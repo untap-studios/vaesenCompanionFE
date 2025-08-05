@@ -1,11 +1,12 @@
 import { Box, TextField } from "@mui/material";
-import React from "react";
+import { CreateCharacterScreenComponentProps } from "../../../types/playerCharacterCreation";
+import { ChangeEvent } from "../../../types/events";
 
 export default function CharacterSkillsAndResources({
   formData,
   handleChange,
-}) {
-  const skillAttributeOptions = {
+}: CreateCharacterScreenComponentProps) {
+  const skillAttributeOptions: {[key: string]: string}  = {
     agility: "Physique",
     closeCombat: "Physique",
     force: "Physique",
@@ -20,7 +21,7 @@ export default function CharacterSkillsAndResources({
     observation: "Empathy",
   };
 
-  const handleSkillChange = (e) => {
+  const handleSkillChange = (e: ChangeEvent) => {
     const { name, value } = e.target;
     const skill = {
       name,
@@ -51,7 +52,7 @@ export default function CharacterSkillsAndResources({
       <TextField
         id="agility"
         onChange={handleSkillChange}
-        value={formData.agility}
+        value={formData.skills.find((skill) => skill?.name === "agility")?.value || 0}
         required
         type="number"
         name="agility"
@@ -61,7 +62,7 @@ export default function CharacterSkillsAndResources({
       <TextField
         id="closeCombat"
         onChange={handleSkillChange}
-        value={formData.closeCombat}
+        value={formData.skills.find((skill) => skill?.name === "closeCombat")?.value || 0}
         type="number"
         required
         name="closeCombat"
@@ -71,7 +72,7 @@ export default function CharacterSkillsAndResources({
       <TextField
         id="force"
         onChange={handleSkillChange}
-        value={formData.force}
+        value={formData.skills.find((skill) => skill?.name === "force")?.value || 0}
         type="number"
         required
         name="force"
@@ -81,7 +82,7 @@ export default function CharacterSkillsAndResources({
       <TextField
         id="medicine"
         onChange={handleSkillChange}
-        value={formData.medicine}
+        value={formData.skills.find((skill) => skill?.name === "medicine")?.value || 0}
         type="number"
         required
         name="medicine"
@@ -91,7 +92,7 @@ export default function CharacterSkillsAndResources({
       <TextField
         id="rangedCombat"
         onChange={handleSkillChange}
-        value={formData.rangedCombat}
+        value={formData.skills.find((skill) => skill?.name === "rangedCombat")?.value || 0}
         type="number"
         required
         name="rangedCombat"
@@ -101,7 +102,7 @@ export default function CharacterSkillsAndResources({
       <TextField
         id="stealth"
         onChange={handleSkillChange}
-        value={formData.stealth}
+        value={formData.skills.find((skill) => skill?.name === "stealth")?.value || 0}
         type="number"
         required
         name="stealth"
@@ -111,7 +112,7 @@ export default function CharacterSkillsAndResources({
       <TextField
         id="investigation"
         onChange={handleSkillChange}
-        value={formData.investigation}
+        value={formData.skills.find((skill) => skill?.name === "investigation")?.value || 0}
         type="number"
         required
         name="investigation"
@@ -121,7 +122,7 @@ export default function CharacterSkillsAndResources({
       <TextField
         id="learning"
         onChange={handleSkillChange}
-        value={formData.learning}
+        value={formData.skills.find((skill) => skill?.name === "learning")?.value || 0}
         type="number"
         required
         name="learning"
@@ -131,7 +132,7 @@ export default function CharacterSkillsAndResources({
       <TextField
         id="vigilance"
         onChange={handleSkillChange}
-        value={formData.vigilance}
+        value={formData.skills.find((skill) => skill?.name === "vigilance")?.value || 0}
         type="number"
         required
         name="vigilance"
@@ -141,7 +142,7 @@ export default function CharacterSkillsAndResources({
       <TextField
         id="inspiration"
         onChange={handleSkillChange}
-        value={formData.inspiration}
+        value={formData.skills.find((skill) => skill?.name === "inspiration")?.value || 0}
         type="number"
         required
         name="inspiration"
@@ -151,7 +152,7 @@ export default function CharacterSkillsAndResources({
       <TextField
         id="manipulation"
         onChange={handleSkillChange}
-        value={formData.manipulation}
+        value={formData.skills.find((skill) => skill?.name === "manipulation")?.value || 0}
         type="number"
         required
         name="manipulation"
@@ -161,7 +162,7 @@ export default function CharacterSkillsAndResources({
       <TextField
         id="observation"
         onChange={handleSkillChange}
-        value={formData.observation}
+        value={formData.skills.find((skill) => skill?.name === "observation")?.value || 0}
         type="number"
         required
         name="observation"

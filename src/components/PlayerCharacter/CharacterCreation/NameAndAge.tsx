@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material";
-import React from "react";
+import { CreateCharacterScreenComponentProps } from "../../../types/playerCharacterCreation";
 
-export default function NameAndAge({ formData, handleChange }) {
+export default function NameAndAge({ formData, handleChange }: CreateCharacterScreenComponentProps) {
   return (
     <>
       <TextField
@@ -25,7 +25,7 @@ export default function NameAndAge({ formData, handleChange }) {
       <TextField
         id="age"
         onChange={handleChange}
-        value={parseInt(formData.age) || ""}
+        value={formData.age}
         required
         name="age"
         type="number"
