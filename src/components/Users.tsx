@@ -1,26 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router";
+import { UserTypes } from "../types/user";
+import { callApi } from "../utils/callApi";
 
 export default function Users() {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<UserTypes[]>([]);
   const location = useLocation(); // Access the location object
   const token = location.state?.token;
 
-  const fetchUsers = async () => {
-    const response = await fetch("http://localhost:8080/api/users", {
-      method: "GET", // Specify the HTTP method (optional, defaults to GET)
-      headers: {
-        "Content-Type": "application/json", // Specify the content type
-        Authorization: `Bearer ${token}`, // Pass the token in the Authorization header
-      },
-    });
-    const data = await response.json();
+  const getUsers = async () => {
+    const data = await callApi("users", "GET");
 
     setUsers(data.data.users);
   };
 
   useEffect(() => {
-    fetchUsers();
+    getUsers();
   }, []);
   return (
     <div>

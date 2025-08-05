@@ -1,21 +1,23 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import { Box, TextField } from "@mui/material";
-import InputGenric from "./formComponents/InputText";
-import FormButton from "./formComponents/FormButton";
+import InputGenric from "./FormComponents/InputText";
+import FormButton from "./FormComponents/FormButton";
+import { ChangeEvent, SubmitEvent } from "../types/events";
+import { callApi } from "../utils/callApi";
 
 export default function Login() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const navigate = useNavigate(); // Initialize the useNavigate hook
+  const navigate = useNavigate();
 
-  const handleEmailChange = (event) => {
+  const handleEmailChange = (event: ChangeEvent): void => {
     setEmail(event.target.value);
   };
-  const handlePasswordChange = (event) => {
+  const handlePasswordChange = (event: ChangeEvent) => {
     setPassword(event.target.value);
   };
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: SubmitEvent) => {
     event.preventDefault();
 
     const data = {
@@ -23,15 +25,7 @@ export default function Login() {
       password,
     };
 
-    const response = await fetch("http://localhost:8080/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
-    const result = await response.json();
+    const result = await callApi("login", "POST", data);
 
     if (result.token && result.userId) {
       localStorage.setItem("token", result.token);

@@ -1,26 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router";
+import { GameTypes } from "../../types/game";
+import { callApi } from "../../utils/callApi";
 
 export default function Games() {
-  const [games, setGames] = useState([]);
-  const location = useLocation(); // Access the location object
+  const [games, setGames] = useState<GameTypes[]>([]);
+  const location = useLocation();
   const token = location.state?.token;
 
   
   useEffect(() => {
-    const fetchGames = async () => {
-      const response = await fetch("http://localhost:8080/api/games", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
-      const data = await response.json();
+    const getGames = async () => {
+      const data = await callApi("games", "GET");
 
       setGames(data.data.games);
     };
-    fetchGames();
+    getGames();
   }, [token]);
   
   return (
@@ -35,7 +30,6 @@ export default function Games() {
             <Link to={`/games/${game._id}`} key={game._id}>
               <div>
                 <h2>{game.name}</h2>
-                <p>{game.email}</p>
                 <img
                   src={game.image || "https://picsum.photos/200/200"}
                   alt={game.name}

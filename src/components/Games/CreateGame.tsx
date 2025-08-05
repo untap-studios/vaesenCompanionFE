@@ -1,5 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router';
+import { SubmitEvent } from '../../types/events';
+import { callApi } from '../../utils/callApi';
 
 export default function CreateGame() {
     const [name, setName] = React.useState("");
@@ -7,7 +9,7 @@ export default function CreateGame() {
     const [image, setImage] = React.useState("");
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e: SubmitEvent) => {
         e.preventDefault();
         const gameData = {
             name,
@@ -15,20 +17,13 @@ export default function CreateGame() {
             image
         };
 
-        fetch("http://localhost:8080/api/games", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-            body: JSON.stringify(gameData),
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            if (data) {
-                navigate("/games", { state: { token: localStorage.getItem("token") } });
-            }
-        })
+        const result = await callApi("games", "POST", gameData);
+        
+        if (result) {
+            navigate("/games");
+        } else {
+            console.error("Failed to create game");
+        }
     }
   return (
     <div>

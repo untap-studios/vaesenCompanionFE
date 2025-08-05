@@ -3,11 +3,11 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Users from "./components/Users";
 import Home from "./components/Home";
 import User from "./components/User";
-import Games from "./components/games/Games";
-import CreateGame from "./components/games/CreateGame";
+import Games from "./components/Games/Games";
+import CreateGame from "./components/Games/CreateGame";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Game from "./components/games/Game";
+import Game from "./components/Games/Game";
 import CreateCharacter from "./components/PlayerCharacter/CharacterCreation/CreateCharacter";
 
 function App() {

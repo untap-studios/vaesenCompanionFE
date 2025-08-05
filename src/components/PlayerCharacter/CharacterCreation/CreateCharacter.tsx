@@ -1,4 +1,4 @@
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import React, { useState } from "react";
 import NameAndAge from "./NameAndAge";
 import CharacterArchetype from "./CharacterArchetype";
@@ -11,15 +11,24 @@ import CharacterMementos from "./CharacterMementos";
 import CharacterEquipment from "./CharacterEquipment";
 import CharacterWeapons from "./CharacterWeapons";
 import { useLocation, useNavigate } from "react-router";
+import {
+  CreateCharacterFormData,
+  CreateCharacterScreenComponentProps,
+  ScreenKey,
+} from "../../../types/playerCharacterCreation";
+import { ChangeEvent } from "../../../types/events";
+
+type Screens = Record<ScreenKey, React.FC<CreateCharacterScreenComponentProps>>;
 
 export default function CreateCharacter() {
   const location = useLocation();
   const navigate = useNavigate();
   const userId = location.state?.userId || "";
-  const [formData, setFormData] = useState({
+
+  const [formData, setFormData] = useState<CreateCharacterFormData>({
     name: "",
     image: "",
-    age: "",
+    age: 0,
     archetype: "",
     motivation: "",
     trauma: "",
@@ -33,8 +42,10 @@ export default function CreateCharacter() {
     resources: 0,
     skills: [],
   });
-  const [currentScreen, setCurrentScreen] = useState("nameAndAge");
-  const screens = {
+
+  const [currentScreen, setCurrentScreen] = useState<ScreenKey>("nameAndAge");
+
+  const screens: Screens = {
     nameAndAge: NameAndAge,
     archetype: CharacterArchetype,
     characterLore: CharacterLore,
@@ -47,7 +58,7 @@ export default function CreateCharacter() {
     CharacterWeapons: CharacterWeapons,
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent) => {
     const { name, value } = e.target;
     const checkIfNum = isNaN(parseInt(value, 10)) ? value : parseInt(value, 10);
 
@@ -69,6 +80,9 @@ export default function CreateCharacter() {
       }
     );
 
+    console.log("Form submitted:", formData);
+    console.log("Response:", response);
+
     if (response.ok) {
       navigate(`/users/${userId}`);
     } else {
@@ -76,8 +90,8 @@ export default function CreateCharacter() {
     }
   };
 
-  const handleChangeScreen = (forward) => {
-    const screenKeys = Object.keys(screens);
+  const handleChangeScreen = (forward: boolean) => {
+    const screenKeys = Object.keys(screens) as ScreenKey[];
     const currentIndex = screenKeys.indexOf(currentScreen);
     if (currentIndex < screenKeys.length - 1 && forward) {
       setCurrentScreen(screenKeys[currentIndex + 1]);
@@ -99,7 +113,6 @@ export default function CreateCharacter() {
           "& > :not(style)": { m: 1, width: "25ch" },
           display: "flex",
           flexDirection: "column",
-          //   bgcolor: "background.paper",
           padding: 2,
           borderRadius: 8,
         }}
