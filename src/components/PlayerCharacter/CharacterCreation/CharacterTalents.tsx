@@ -3,12 +3,13 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  TextField,
 } from "@mui/material";
 import React from "react";
+import { CreateCharacterScreenComponentProps } from "../../../types/playerCharacterCreation";
+import { SelectEvent } from "../../../types/events";
 
-export default function CharacterTalents({ formData, handleChange }) {
-  const [selectedTalent, setSelectedTalent] = React.useState();
+export default function CharacterTalents({ formData, handleChange }: CreateCharacterScreenComponentProps) {
+  const [selectedTalent, setSelectedTalent] = React.useState<string>();
 
   const talents = [
     {
@@ -37,7 +38,7 @@ export default function CharacterTalents({ formData, handleChange }) {
       description: "Description for Talent 5",
     },
   ];
-  const handleTalentChange = (e) => {
+  const handleTalentChange = (e: SelectEvent) => {
     const { name, value } = e.target;
     const talent = {
       name: value,

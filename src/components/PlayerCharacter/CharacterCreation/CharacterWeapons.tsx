@@ -3,13 +3,15 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  TextField,
 } from "@mui/material";
 import React from "react";
+import { CreateCharacterScreenComponentProps } from "../../../types/playerCharacterCreation";
+import { Weapon } from "../../../types/playerCharacter";
+import { SelectEvent } from "../../../types/events";
 
-export default function CharacterWeapons({ formData, handleChange }) {
+export default function CharacterWeapons({ formData, handleChange }: CreateCharacterScreenComponentProps) {
   const [selectedWeapon, setSelectedWeapon] = React.useState("");
-  const weapons = [
+  const weapons: Weapon[] = [
     {
       name: "revolver",
       label: "Revolver",
@@ -29,7 +31,7 @@ export default function CharacterWeapons({ formData, handleChange }) {
       shortRange: 0,
     },
   ];
-  const handleWeaponChange = (e) => {
+  const handleWeaponChange = (e: SelectEvent) => {
     const { name, value } = e.target;
     const weapon = {
       name: value,

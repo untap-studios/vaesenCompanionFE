@@ -1,12 +1,15 @@
 import { Button, TextField, Typography } from "@mui/material";
 import React from "react";
+import { CreateCharacterScreenComponentProps } from "../../../types/playerCharacterCreation";
+import { Relationship } from "../../../types/playerCharacter";
+import { ChangeEvent } from "../../../types/events";
 
-export default function CharacterRelationships({ formData, handleChange }) {
-  const [toggleForm, setToggleForm] = React.useState(false);
-  const [relationships, setRelationships] = React.useState([]);
-  const [characterName, setCharacterName] = React.useState("");
+export default function CharacterRelationships({ formData, handleChange }: CreateCharacterScreenComponentProps) {
+  const [toggleForm, setToggleForm] = React.useState<boolean>(false);
+  const [relationships, setRelationships] = React.useState<Relationship[]>([]);
+  const [characterName, setCharacterName] = React.useState<string>("");
   const [relationshipDescription, setRelationshipDescription] =
-    React.useState("");
+    React.useState<string>("");
 
   const handleRelationshipChange = () => {
     const relationship = {
@@ -22,10 +25,10 @@ export default function CharacterRelationships({ formData, handleChange }) {
     });
   };
 
-  const handleCharacterNameChange = (e) => {
+  const handleCharacterNameChange = (e: ChangeEvent) => {
     setCharacterName(e.target.value);
   };
-  const handleRelationshipDescriptionChange = (e) => {
+  const handleRelationshipDescriptionChange = (e: ChangeEvent) => {
     setRelationshipDescription(e.target.value);
   };
   return (
@@ -33,8 +36,8 @@ export default function CharacterRelationships({ formData, handleChange }) {
       {relationships &&
         relationships.map((relationship, index) => (
           <div key={index}>
-            <Typography variant="h6">{relationship.name}</Typography>
-            <Typography variant="body1">{relationship.value}</Typography>
+            <Typography variant="h6">{relationship.characterName}</Typography>
+            <Typography variant="body1">{relationship.relationshipDescription}</Typography>
           </div>
         ))}
       {toggleForm && (
@@ -65,8 +68,8 @@ export default function CharacterRelationships({ formData, handleChange }) {
               setRelationships([
                 ...relationships,
                 {
-                  name: characterName,
-                  value: relationshipDescription,
+                  characterName,
+                  relationshipDescription,
                 },
               ]);
               handleRelationshipChange();

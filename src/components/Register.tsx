@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router";
+import { ChangeEvent, SubmitEvent } from "../types/events";
+import { callApi } from "../utils/callApi";
 
 export default function Register() {
   const [email, setEmail] = React.useState("");
@@ -9,13 +11,13 @@ export default function Register() {
 
   const navigate = useNavigate();
 
-  const handleEmailChange = (event) => {
+  const handleEmailChange = (event: ChangeEvent) => {
     setEmail(event.target.value);
   };
-  const handlePasswordChange = (event) => {
+  const handlePasswordChange = (event: ChangeEvent) => {
     setPassword(event.target.value);
   };
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: SubmitEvent) => {
     event.preventDefault();
 
     const data = {
@@ -25,16 +27,8 @@ export default function Register() {
       password,
     };
 
-    const response = await fetch("http://localhost:8080/api/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
-    const result = await response.json();
-
+    const result = await callApi("register", "POST", data);
+    console.log('yo', result);
     if (result.userId) {
       localStorage.setItem("token", result.token);
       navigate(`/users/${result.userId}`, {

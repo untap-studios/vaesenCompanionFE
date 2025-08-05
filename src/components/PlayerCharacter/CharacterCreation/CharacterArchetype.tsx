@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
-import React from "react";
+import { CreateCharacterScreenComponentProps } from "../../../types/playerCharacterCreation";
 
-export default function CharacterArchetype({ formData, handleChange }) {
+export default function CharacterArchetype({ formData, handleChange }: CreateCharacterScreenComponentProps) {
   const archetypeOptions = [
     {
       value: "Academic",
@@ -42,7 +42,7 @@ export default function CharacterArchetype({ formData, handleChange }) {
     },
   ];
 
-  const handleArchetypeChange = (archetype) => {
+  const handleArchetypeChange = (archetype: string) => {
     handleChange({
       target: { name: "archetype", value: archetype },
     });

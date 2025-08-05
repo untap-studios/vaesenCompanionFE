@@ -1,8 +1,9 @@
 import { TextField } from "@mui/material";
-import React from "react";
+import { ChangeEvent } from "../../../types/events";
+import { CreateCharacterScreenComponentProps } from "../../../types/playerCharacterCreation";
 
-export default function CharacterAttributes({ formData, handleChange }) {
-    const handleAttributeChange = (e) => {
+export default function CharacterAttributes({ formData, handleChange }: CreateCharacterScreenComponentProps) {
+    const handleAttributeChange = (e: ChangeEvent) => {
         const { name, value } = e.target;
         const attribute = {
             name,
