@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
+import CharacterTile from "./PlayerCharacter/CharacterView/CharacterTile";
 import { UserTypes } from "../types/user";
 import { callApi } from "../utils/callApi";
 
@@ -39,10 +40,7 @@ export default function User() {
             <h2>Characters</h2>
             {userData.playerCharacters &&
               userData.playerCharacters.map((character) => (
-                <div key={character._id}>
-                  <h3>{character.name}</h3>
-                  <p>{character.archetype}</p>
-                </div>
+                <CharacterTile character={character} />
               ))}
           </div>
         </div>

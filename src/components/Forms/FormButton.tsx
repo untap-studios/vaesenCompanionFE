@@ -1,7 +1,12 @@
 import { Button } from '@mui/material'
-import React from 'react'
+import React, { JSX } from 'react'
 
-const FormButton = (props) => {
+interface ButtonProps {
+  text: string;
+  type?: 'button' | 'submit' | 'reset';
+}
+
+const FormButton = (props:ButtonProps): JSX.Element => {
   const {
     text,
     type = 'submit'
