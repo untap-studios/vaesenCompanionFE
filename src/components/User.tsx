@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
-import CharacterTile from "./PlayerCharacter/CharacterTile";
+import CharacterTile from "./PlayerCharacter/CharacterView/CharacterTile";
 import { UserTypes } from "../types/user";
 import { callApi } from "../utils/callApi";
 
@@ -40,7 +40,7 @@ export default function User() {
             <h2>Characters</h2>
             {userData.playerCharacters &&
               userData.playerCharacters.map((character) => (
-                <CharacterTile character={character}/>
+                <CharacterTile character={character} />
               ))}
           </div>
         </div>

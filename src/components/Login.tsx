@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import { Box, TextField } from "@mui/material";
-import InputGenric from "./FormComponents/InputText";
-import FormButton from "./FormComponents/FormButton";
+import InputGenric from "./Forms/InputText";
+import FormButton from "./Forms/FormButton";
 import { ChangeEvent, SubmitEvent } from "../types/events";
 import { callApi } from "../utils/callApi";
 

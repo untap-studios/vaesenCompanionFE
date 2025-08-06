@@ -1,7 +1,9 @@
 import { Box, Button, Container, Typography } from "@mui/material";
 import React from "react";
+import { CharacterSheet, Equipment } from "../../../types/playerCharacter";
 
-const ItemsDisplay = ({ title, items }) => {
+const ItemsDisplay = ({ title, items }: { title: string; items?: Equipment[] }) => {
+  if(!items || items.length === 0) return;
   return (
     <Container
       sx={{
@@ -37,7 +39,7 @@ const ItemsDisplay = ({ title, items }) => {
   );
 };
 
-const CharacterView = ({ character }) => {
+const CharacterView = ({ character }: { character: CharacterSheet }) => {
   console.log({ ...character });
   const {
     name,

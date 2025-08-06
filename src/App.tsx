@@ -9,7 +9,8 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Game from "./components/Games/Game";
 import CreateCharacter from "./components/PlayerCharacter/CharacterCreation/CreateCharacter";
-import Character from "./components/Character";
+import Character from "./components/PlayerCharacter/CharacterView/Character";
+
 
 function App() {
   return (

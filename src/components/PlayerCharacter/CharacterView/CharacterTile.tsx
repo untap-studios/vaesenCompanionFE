@@ -1,8 +1,9 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
 import { Link } from "react-router";
+import { CharacterSheet } from "../../../types/playerCharacter";
 
-const CharacterTile = ({ character }) => {
+const CharacterTile = ({ character }: { character: CharacterSheet }) => {
   return (
     <Link to={`/character/${character._id}`}>
       <Box>
@@ -15,9 +16,6 @@ const CharacterTile = ({ character }) => {
         </Typography>
         <Typography variant="body2" sx={{ color: "#ccc" }}>
           {character.archetype}
-        </Typography>
-        <Typography variant="body2" sx={{ color: "#ccc" }}>
-          {character.description}
         </Typography>
       </Box>
     </Link>

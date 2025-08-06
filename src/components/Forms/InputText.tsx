@@ -1,7 +1,14 @@
 import React from "react";
 import { Box, TextField, Typography } from "@mui/material";
 
-const InputText = (props) => {
+interface InputTextProps {
+  kind: string;
+  labelText: string;
+  required?: boolean;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const InputText = (props: InputTextProps) => {
   const { kind, labelText, required, onChange } = props;
 
   return (
