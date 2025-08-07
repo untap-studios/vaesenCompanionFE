@@ -10,25 +10,27 @@ import Register from "./components/Register";
 import Game from "./components/Games/Game";
 import CreateCharacter from "./components/PlayerCharacter/CharacterCreation/CreateCharacter";
 import Character from "./components/PlayerCharacter/CharacterView/Character";
-
+import Header from "./components/Layout/Header";
+import { Container } from "@mui/material";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/games" element={<Games />} />
-        <Route path="/games/:gameId" element={<Game />} />
-        <Route path="/create-game" element={<CreateGame />} />
-        <Route path="/users" element={<Users />} />
-        <Route path="/users/:userId" element={<User />} />
-        <Route path="/create-player" element={<CreateCharacter />} />
-        <Route path="/character/:charId" element={<Character />} />
-        <Route path="/" element={<Home />} />
-        <Route path="*" element={<h1>404 Not Found</h1>} />
-      </Routes>
-    </Router>
+        <Router>
+          <Header />
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/games" element={<Games />} />
+            <Route path="/games/:gameId" element={<Game />} />
+            <Route path="/create-game" element={<CreateGame />} />
+            <Route path="/users" element={<Users />} />
+            <Route path="/users/:userId" element={<User />} />
+            <Route path="/create-player" element={<CreateCharacter />} />
+            <Route path="/character/:charId" element={<Character />} />
+            <Route path="/" element={<Home />} />
+            <Route path="*" element={<h1>404 Not Found</h1>} />
+          </Routes>
+        </Router>
   );
 }
 
