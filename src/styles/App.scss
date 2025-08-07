@@ -1,10 +1,10 @@
 // Put your imports here instead of wiring them to the component.
-@import 'foundation/_forms';
+@use 'theme/_forms';
+@use 'theme/_navigation';
+
 
 #root {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
