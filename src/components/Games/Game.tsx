@@ -4,6 +4,7 @@ import { GameTypes } from "../../types/game";
 import { UserTypes } from "../../types/user";
 import { MouseEvent, SubmitEvent } from "../../types/events";
 import { callApi } from "../../utils/callApi";
+import AutocompleteSearch from "./AutocompleteSearch";
 
 export default function Game() {
   const { gameId } = useParams();
@@ -30,18 +31,7 @@ export default function Game() {
 
   const addUserToGame = async (e: MouseEvent) => {
     e.preventDefault();
-    // const response = await fetch(`http://localhost:8080/api/games/${gameId}/add-user`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Authorization: `Bearer ${localStorage.getItem("token")}`,
-    //   },
-    //   body: JSON.stringify(userToAdd),
-    // });
-    // const data = await response.json();
-
     const data = await callApi(`games/${gameId}/add-user`, "POST", userToAdd);
-    console.log(data);
   };
 
   return (
@@ -55,12 +45,17 @@ export default function Game() {
         <button type="submit">find user</button>
       </form>
 
+      {gameId && <AutocompleteSearch gameId={gameId}/>}
+
       {userToAdd && (
         <div>
           <div onClick={addUserToGame}>XXXX</div>
           <h2>{userToAdd.name}</h2>
           <p>{userToAdd.email}</p>
-          <img src={userToAdd.image || "https://picsum.photos/200/200"} alt={userToAdd.name} />
+          <img
+            src={userToAdd.imageUrl || "https://picsum.photos/200/200"}
+            alt={userToAdd.name}
+          />
         </div>
       )}
 
@@ -69,7 +64,15 @@ export default function Game() {
           <div key={user?._id}>
             <h2>{user?.name}</h2>
             <p>{user?.email}</p>
-            <img src={user?.image || "https://picsum.photos/200/200"} alt={user?.name} />
+            <img
+              style={{
+                maxWidth: "200px",
+                maxHeight: "200px",
+                objectFit: "cover",
+              }}
+              src={user?.imageUrl || "https://picsum.photos/200/200"}
+              alt={user?.name}
+            />
           </div>
         ))}
     </div>
