@@ -28,7 +28,7 @@ export default function Users() {
                 <h2>{user.name}</h2>
                 <p>{user.email}</p>
                 <img
-                  src={user.image || "https://picsum.photos/200/200"}
+                  src={user.imageUrl || "https://picsum.photos/200/200"}
                   alt={user.name}
                 />
               </div>
