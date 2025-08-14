@@ -13,7 +13,6 @@ export default function User() {
   useEffect(() => {
     const getUser = async () => {
       const data = await callApi(`users/${userId}`, "GET");
-      console.log(data);
       setUserData(data.data.user);
     };
 

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo } from "react";
+import React, { useState, useRef, useMemo, Dispatch, SetStateAction } from "react";
 import {
   TextField,
   Popper,
@@ -12,8 +12,15 @@ import { debounce } from "lodash";
 import { UserTypes } from "../../types/user";
 import { ChangeEvent } from "../../types/events";
 import { callApi } from "../../utils/callApi";
+import { GameTypes } from "../../types/game";
 
-const CustomUserAutocomplete = (gameId: {gameId: string}) => {
+const CustomUserAutocomplete = ({
+  gameId,
+  setGameData,
+}: {
+  gameId: string;
+  setGameData: Dispatch<SetStateAction<GameTypes | null>>;
+}) => {
   const [inputValue, setInputValue] = useState("");
   const [results, setResults] = useState<UserTypes[]>([]);
   const [loading, setLoading] = useState(false);
@@ -50,9 +57,11 @@ const CustomUserAutocomplete = (gameId: {gameId: string}) => {
     setInputValue(user._id);
     setOpen(false);
     
-    const data = await callApi(`games/${gameId.gameId}/add-user`, "POST", {_id: user._id});
+    const data = await callApi(`games/${gameId}/add-user`, "POST", {_id: user._id});
 
     console.log("User added to game:", data);
+    setGameData(data.data.game);
+    setResults([]);
   };
 
   return (
