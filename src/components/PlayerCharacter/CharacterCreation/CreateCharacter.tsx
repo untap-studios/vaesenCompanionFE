@@ -17,13 +17,14 @@ import {
   ScreenKey,
 } from "../../../types/playerCharacterCreation";
 import { ChangeEvent } from "../../../types/events";
+import { callApi } from "../../../utils/callApi";
 
 type Screens = Record<ScreenKey, React.FC<CreateCharacterScreenComponentProps>>;
 
 export default function CreateCharacter() {
   const location = useLocation();
   const navigate = useNavigate();
-  const userId = location.state?.userId || "";
+  const userId = location.state?.userId || localStorage.getItem("userId");
 
   const [formData, setFormData] = useState<CreateCharacterFormData>({
     name: "",
@@ -69,21 +70,15 @@ export default function CreateCharacter() {
   };
 
   const handleSubmit = async () => {
-    const response = await fetch(
-      "http://localhost:8080/api/player-characters",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...formData, userId }),
-      }
+    const response = await callApi(
+      "player-characters",
+      "POST",
+      { ...formData, userId }
     );
-
     console.log("Form submitted:", formData);
     console.log("Response:", response);
 
-    if (response.ok) {
+    if (response.data) {
       navigate(`/users/${userId}`);
     } else {
       console.error("Error submitting form");

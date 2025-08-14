@@ -7,7 +7,7 @@ export default function Register() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [name, setName] = React.useState("");
-  const [image, setImage] = React.useState("");
+  const [image, setImage] = React.useState<File | null>(null);
 
   const navigate = useNavigate();
 
@@ -20,19 +20,28 @@ export default function Register() {
   const handleSubmit = async (event: SubmitEvent) => {
     event.preventDefault();
 
-    const data = {
+    const imageData = new FormData();
+
+    if (image) {
+      imageData.append("image", image);
+    }
+    
+    const result = await callApi("upload", "POST", imageData);
+
+    const userData = {
       name,
-      image,
       email,
       password,
-    };
+      imageUrl: result.imageUrl
+    }
 
-    const result = await callApi("register", "POST", data);
-    console.log('yo', result);
-    if (result.userId) {
-      localStorage.setItem("token", result.token);
-      navigate(`/users/${result.userId}`, {
-        state: { token: result.token },
+    const response = await callApi("register", "POST", userData)
+
+    if (response.userId) {
+      localStorage.setItem("token", response.token);
+      localStorage.setItem("userId", response.userId)
+      navigate(`/users/${response.userId}`, {
+        state: { token: response.token },
       });
     }
   };
@@ -47,16 +56,6 @@ export default function Register() {
             type="text"
             id="name"
             name="name"
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="image">Image URL</label>
-          <input
-            onChange={(e) => setImage(e.target.value)}
-            type="text"
-            id="image"
-            name="image"
             required
           />
         </div>
@@ -80,6 +79,24 @@ export default function Register() {
             required
           />
         </div>
+        <input
+          type="file"
+          name="image"
+          onChange={(event) => {
+            const file = event.target.files?.[0];
+            if (file) setImage(file);
+          }}
+        />
+        {image && <img
+          src={URL.createObjectURL(image)}
+          alt="Preview"
+          style={{
+            width: "200px",
+            height: "auto",
+            display: image ? "block" : "none",
+            marginTop: "10px",
+          }}
+        />}
         <button type="submit">Login</button>
       </form>
     </div>

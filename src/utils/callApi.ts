@@ -1,9 +1,9 @@
 import axios from "axios";
 
-export const callApi = async (endpoint: string, method: string = 'GET', body?: any) => {
+export const callApi = async (endpoint: string, method: string = 'GET', body?: any, includesFile = false) => {
   const token = localStorage.getItem('token');
   const headers: HeadersInit = {
-    'Content-Type': 'application/json',
+    // 'Content-Type': 'application/json',
   };
 
   if (token) {

@@ -3,7 +3,7 @@ import { UserTypes } from "./user";
 export interface GameTypes {
     _id: string;
     name: string;
-    image?: string;
+    imageUrl?: string;
     description?: string;
     users?: UserTypes[];
     playerCharacters?: string[];
