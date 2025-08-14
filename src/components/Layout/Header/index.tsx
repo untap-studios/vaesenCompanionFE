@@ -3,12 +3,8 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
 import { useLocation } from "react-router";
@@ -20,7 +16,6 @@ const pages = [
   { linkText: "Games", path: "/games" },
   { linkText: "Users", path: "/users" },
 ];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 
 const hideNavForRoute = () => {
@@ -33,13 +28,7 @@ const checkIfLoggedIn = () => {
   return token !== null && token !== undefined;
 };
 
-const handleOnclickLogout = () => {
-  console.log("Handle Logout");
-};
-
 function Header() {
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -60,13 +49,11 @@ function Header() {
             disableGutters
           >
             <Box sx={{ display: "flex" }}>
-              {/* Links */}
               {pages.map((page) => (
-                <NavLink {...page} />
+                <NavLink key={page.path} {...page} />
               ))}
             </Box>
             <Box sx={{ display: "flex" }}>
-              {/* Profile Icon */}
               {checkIfLoggedIn() ? (
                 <div>
                   <IconButton
